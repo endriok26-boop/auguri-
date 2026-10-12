@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Per Sofia 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Karla:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --wine:#4a1238; --deep:#8c2560; --rose:#e8558a; --pink:#ff8fb1; --blush:#ffe3ec; --champagne:#ffe6c4;
+  --script:'Great Vibes','Snell Roundhand',cursive; --serif:'Fraunces',Georgia,serif; --sans:'Karla',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{
+  background:radial-gradient(ellipse at 50% 0%,#f06a9b 0%,#c93b78 38%,#6e1a4b 80%,#4a1238 100%);
+  color:var(--blush);font-family:var(--sans);overflow:hidden;
+}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+#bg{z-index:0}#fx{z-index:20}
+.scene{position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:calc(24px + env(safe-area-inset-top)) 22px calc(24px + env(safe-area-inset-bottom));text-align:center;
+  opacity:0;visibility:hidden;transition:opacity .7s,visibility .7s;overflow-y:auto}
+.scene.on{opacity:1;visibility:visible}
+h1,h2{font-family:var(--script);font-weight:400;line-height:1.05;text-shadow:0 2px 18px #4a123860}
+button{font:inherit;cursor:pointer;border:0;color:var(--wine);background:linear-gradient(135deg,#fff,var(--blush));padding:14px 30px;border-radius:999px;
+  font-weight:600;font-size:1rem;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 26px #4a123855}
+button:hover{transform:translateY(-2px)}
+button:focus-visible,[role=button]:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.hint{opacity:.85;margin-top:22px;font-size:.95rem}
+
+/* busta */
+#s-envelope h1{font-size:clamp(2.6rem,11vw,4rem);margin-bottom:12px}
+.stage{padding-top:110px;animation:float 3.5s ease-in-out infinite}
+#envelope{position:relative;width:min(300px,78vw);aspect-ratio:3/2;perspective:900px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#envelope>div{position:absolute}
+#envelope .back{inset:0;background:#d9467d;border-radius:10px;box-shadow:0 22px 50px #4a123880;z-index:1}
+#envelope .letter{left:7%;right:7%;top:5%;height:82%;z-index:2;border-radius:6px;background:var(--blush);
+  box-shadow:0 2px 8px #0003;transition:transform .9s cubic-bezier(.3,.7,.3,1) .45s;display:flex;align-items:center;justify-content:center;
+  font-family:var(--script);font-size:2rem;color:var(--deep)}
+#envelope .front{inset:0;z-index:3;border-radius:10px;pointer-events:none;
+  background:linear-gradient(to top right,#e8558a 49.5%,transparent 50.5%),linear-gradient(to top left,#f26b9a 49.5%,transparent 50.5%)}
+#envelope .flap{left:0;right:0;top:0;height:58%;z-index:4;background:#ff8fb1;clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:50% 0;transition:transform .55s ease,z-index 0s .28s}
+#envelope .seal{left:50%;top:44%;z-index:5;transform:translate(-50%,-50%);font-size:2.1rem;transition:opacity .3s;pointer-events:none;filter:drop-shadow(0 3px 4px #4a123870)}
+#envelope.open .flap{transform:rotateX(180deg);z-index:0}
+#envelope.open .letter{transform:translateY(-62%)}
+#envelope.open .seal{opacity:0}
+@keyframes float{50%{transform:translateY(-10px)}}
+
+/* biglietto */
+.big21{font-family:var(--script);font-size:clamp(7rem,32vw,13rem);line-height:.95;color:#fff;text-shadow:0 0 40px #ff8fb1,0 4px 24px #4a123890}
+#s-card h1{font-size:clamp(2.4rem,9vw,3.8rem);margin:6px 0 20px}
+.paper{max-width:34rem;width:100%;padding:26px 24px;background:#ffe3ecee;color:var(--wine);border-radius:18px;
+  box-shadow:0 20px 50px #4a123870;border:1px solid #fff9}
+#letter{font-family:var(--serif);font-size:clamp(1.02rem,3.5vw,1.25rem);line-height:1.65;font-style:italic;min-height:9em}
+#letter p+p{margin-top:.8em}
+#s-card button{margin-top:24px}
+
+/* torta */
+#s-cake h2{font-size:clamp(2.2rem,8vw,3.2rem);margin-bottom:4px}
+#left{opacity:.9;margin-bottom:34px;min-height:1.5em}
+.cake{width:min(340px,86vw)}
+.candles{display:flex;flex-wrap:wrap;justify-content:center;gap:26px 10px;padding:0 10px;margin-bottom:-2px}
+.candle{position:relative;width:12px;height:36px;border-radius:3px 3px 0 0;border:0;padding:0;box-shadow:none;
+  background:repeating-linear-gradient(135deg,#fff 0 5px,var(--c) 5px 10px)}
+.candle:hover{transform:none}
+.candle::before{content:"";position:absolute;left:50%;bottom:100%;width:10px;height:18px;margin-left:-5px;
+  background:radial-gradient(ellipse at 50% 70%,#fff 10%,#ffe08a 45%,#ff9a3d 80%);border-radius:50% 50% 50% 50%/65% 65% 35% 35%;
+  animation:flick .35s infinite alternate;transform-origin:50% 100%;box-shadow:0 0 14px 4px #ffd27a90}
+.candle.out::before{animation:none;opacity:0;transform:scale(0);transition:.4s}
+.candle.out::after{content:"";position:absolute;left:50%;bottom:100%;width:3px;height:16px;background:#fff7;border-radius:3px;animation:smoke 1.4s forwards}
+@keyframes flick{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.92,1.12) rotate(3deg)}}
+@keyframes smoke{to{transform:translateY(-34px);opacity:0}}
+.tier{height:44px;background:#fff;border-radius:12px 12px 0 0;position:relative}
+.tier::after{content:"";position:absolute;left:0;right:0;top:100%;height:12px;
+  background:radial-gradient(circle 8px at 8px 0,#fff 98%,#0000) 0 0/32px 12px repeat-x}
+.tier.b{height:60px;background:var(--pink);border-radius:0 0 14px 14px;margin-top:0;box-shadow:0 24px 40px #4a123880}
+#wish{margin-top:40px;display:none}
+#wish p{font-family:var(--script);font-size:2rem;margin-bottom:16px}
+
+/* motivi */
+#s-why .count{opacity:.9;margin-bottom:18px;font-family:var(--serif);font-style:italic}
+.why{width:min(420px,88vw);min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:34px 28px;
+  background:var(--blush);color:var(--wine);border-radius:22px;font-family:var(--serif);font-style:italic;font-size:clamp(1.25rem,4.8vw,1.6rem);line-height:1.4;
+  box-shadow:0 24px 60px #4a1238a0;transform:rotate(-1.5deg)}
+.why::before{content:"♥️";font-style:normal;color:var(--rose);font-size:1.6rem}
+.why.swap{animation:swap .5s}
+@keyframes swap{0%{transform:rotate(-1.5deg)}45%{transform:rotate(6deg) translateX(60px);opacity:0}55%{transform:rotate(-6deg) translateX(-60px);opacity:0}100%{transform:rotate(-1.5deg);opacity:1}}
+#s-why button{margin-top:30px}
+
+/* finale */
+#s-end h1{font-size:clamp(3rem,13vw,5.6rem);margin-bottom:18px}
+#s-end p.t{font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,4vw,1.45rem);max-width:30rem;line-height:1.6}
+.sign{margin:18px 0 26px;font-family:var(--script);font-size:2.4rem}
+.heart{font-size:3.6rem;background:none;box-shadow:none;padding:0;animation:beat 1.2s infinite}
+@keyframes beat{15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.18)}60%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas><canvas id="fx"></canvas>
+
+<section class="scene on" id="s-envelope">
+  <h1 id="to"></h1>
+  <div class="stage">
+    <div id="envelope" role="button" tabindex="0" aria-label="Apri la busta">
+      <div class="back"></div><div class="letter">♥️</div><div class="front"></div><div class="flap"></div><div class="seal">💗</div>
+    </div>
+  </div>
+  <p class="hint">Tocca la busta</p>
+</section>
+
+<section class="scene" id="s-card">
+  <div class="big21" id="age"></div>
+  <h1 id="title"></h1>
+  <div class="paper"><div id="letter"></div></div>
+  <button data-go="s-cake" id="toCake" style="display:none">Continua</button>
+</section>
+
+<section class="scene" id="s-cake">
+  <h2>Spegni le candeline</h2>
+  <p id="left"></p>
+  <div class="cake">
+    <div class="candles" id="candles"></div>
+    <div class="tier"></div><div class="tier b"></div>
+  </div>
+  <div id="wish"><p>Esprimi un desiderio…</p><button id="toWhy">Fatto</button></div>
+</section>
+
+<section class="scene" id="s-why">
+  <p class="count" id="count"></p>
+  <div class="why" id="why"></div>
+  <button id="next">Un altro motivo</button>
+</section>
+
+<section class="scene" id="s-end">
+  <h1 id="endTitle"></h1>
+  <p class="t" id="endText"></p>
+  <div class="sign" id="sign"></div>
+  <button class="heart" id="heart" aria-label="Lancia cuori">💗</button>
+  <p class="hint">Toccalo</p>
+</section>
+
+<script>
+/* ====== PERSONALIZZA QUI ====== */
+const CONFIG = {
+  nome: "Sofia",
+  eta: 21,
+  firma: "Il tuo [Nome]",
+  lettera: [
+    "È appena scoccata la mezzanotte e volevo essere il primo a dirtelo.",
+    "Ventuno anni: una porta nuova, e io sono felicissimo di attraversarla insieme a te.",
+    "Grazie per come mi fai ridere, per come mi capisci e per come rendi speciali anche i giorni normali."
+  ],
+  motivi: [
+    "Hai una risata che si sente da lontano, e mi fa sempre sorridere.",
+    "Con te anche aspettare un autobus diventa divertente.",
+    "Sei bellissima, e non te ne accorgi mai abbastanza.",
+    "Mi ascolti davvero, anche quando dico cose senza senso.",
+    "Sei testarda nel modo giusto.",
+    "Mi fai venire voglia di essere una versione migliore di me.",
+    "Il tuo modo di prenderti cura delle persone.",
+    "Come ti illumini quando parli di ciò che ami.",
+    "Sai sempre cosa dire nei momenti difficili.",
+    "Le tue espressioni quando fai finta di essere arrabbiata.",
+    "Il tuo profumo, che riconoscerei ovunque.",
+    "Sei la mia persona preferita con cui non fare niente.",
+    "Hai un coraggio che spesso sottovaluti.",
+    "I tuoi abbracci aggiustano le giornate storte.",
+    "Mi fai sentire a casa, ovunque siamo.",
+    "Hai gusti musicali discutibili e li adoro.",
+    "Sei sempre te stessa, e per me è la cosa più bella.",
+    "Con te il tempo passa troppo in fretta.",
+    "Sei il mio primo pensiero la mattina e l'ultimo la sera.",
+    "Ogni ricordo con te è tra i miei preferiti.",
+    "Perché sei tu. E non ne servono altri."
+  ],
+  fineTitolo: "Buon compleanno, amore mio",
+  fineTesto: "Che questo nuovo anno ti porti tutto ciò che desideri e ancora di più. Io farò il tifo per te, sempre."
+};
+/* ================================ */
+
+const $ = s => document.querySelector(s);
+const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+const wait = ms => new Promise(r => setTimeout(r, ms));
+function go(id){document.querySelectorAll('.scene').forEach(s=>s.classList.toggle('on',s.id===id))}
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+document.title = `Per ${CONFIG.nome} 💗`;
+$('#to').textContent = `Per te, ${CONFIG.nome}`;
+$('#age').textContent = CONFIG.eta;
+$('#title').textContent = `Buon compleanno, ${CONFIG.nome}`;
+$('#endTitle').textContent = CONFIG.fineTitolo;
+$('#endText').textContent = CONFIG.fineTesto;
+$('#sign').textContent = CONFIG.firma;
+
+/* sfondo: cuori e petali che salgono piano */
+const bc = $('#bg'), bx = bc.getContext('2d'); let drift = [];
+function sizeBg(){bc.width=innerWidth;bc.height=innerHeight;
+  drift=Array.from({length:Math.min(34,Math.round(innerWidth/22))},()=>({
+    x:Math.random()*bc.width,y:Math.random()*bc.height,s:Math.random()*20+10,v:Math.random()*.35+.15,
+    p:Math.random()*6,a:Math.random()*.3+.1,g:Math.random()<.7?'♥️':'✿'}))}
+sizeBg(); addEventListener('resize',sizeBg);
+(function tick(t){bx.clearRect(0,0,bc.width,bc.height);
+  drift.forEach(d=>{ if(!reduce){d.y-=d.v;d.x+=Math.sin(t/1600+d.p)*.3; if(d.y<-30){d.y=bc.height+30;d.x=Math.random()*bc.width}}
+    bx.globalAlpha=d.a;bx.fillStyle='#fff';bx.font=d.s+'px serif';bx.fillText(d.g,d.x,d.y)});
+  if(!reduce)requestAnimationFrame(tick)})(0);
+
+/* coriandoli e cuori */
+const fc = $('#fx'), fx = fc.getContext('2d'); let parts = [], running = false;
+function sizeFx(){fc.width=innerWidth;fc.height=innerHeight} sizeFx(); addEventListener('resize',sizeFx);
+const COL=['#ffffff','#ff8fb1','#ffe3ec','#ffd27a','#ff5c8a'];
+function burst(n=160,x=innerWidth/2,y=innerHeight*.6){
+  for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,v=Math.random()*11+4;
+    parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-7,w:Math.random()*8+4,h:Math.random()*5+3,c:COL[i%5],r:Math.random()*6,vr:Math.random()*.3-.15,l:1})}
+  kick()}
+function hearts(n=30){
+  for(let i=0;i<n;i++)parts.push({x:Math.random()*innerWidth,y:innerHeight+20,vx:Math.random()*2-1,vy:-(Math.random()*4+3),heart:1,s:Math.random()*18+14,l:1});
+  kick()}
+function kick(){if(!running){running=true;requestAnimationFrame(loop)}}
+function loop(){
+  fx.clearRect(0,0,fc.width,fc.height);
+  parts=parts.filter(p=>p.l>0);
+  parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;
+    if(p.heart){p.l-=.004;fx.globalAlpha=Math.max(p.l,0);fx.font=p.s+'px serif';fx.fillText('💗',p.x,p.y)}
+    else{p.vy+=.28;p.vx*=.985;p.r+=p.vr;p.l-=.006;fx.globalAlpha=Math.max(p.l,0);fx.save();fx.translate(p.x,p.y);fx.rotate(p.r);fx.fillStyle=p.c;fx.fillRect(-p.w/2,-p.h/2,p.w,p.h);fx.restore()}});
+  fx.globalAlpha=1;
+  if(parts.length)requestAnimationFrame(loop);else{running=false;fx.clearRect(0,0,fc.width,fc.height)}}
+
+/* busta -> biglietto */
+async function openEnv(){
+  const env=$('#envelope'); if(env.classList.contains('open'))return;
+  env.classList.add('open'); await wait(1700); go('s-card'); burst(); typeLetter()}
+$('#envelope').addEventListener('click',openEnv);
+$('#envelope').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openEnv()}});
+
+async function typeLetter(){
+  const box=$('#letter'); box.innerHTML='';
+  for(const para of CONFIG.lettera){
+    const p=document.createElement('p'); box.appendChild(p);
+    if(reduce){p.textContent=para;continue}
+    for(const ch of para){p.textContent+=ch; await wait(ch==='.'||ch===','?170:32)}
+    await wait(350)}
+  $('#toCake').style.display='inline-block'}
+
+/* candeline */
+const cols=['#ff5c8a','#ff8fb1','#c77dff','#ffd27a'];
+let left=CONFIG.eta;
+const upd=()=>{$('#left').textContent=left?`Ne restano ${left}. Tocca ogni candelina.`:'Tutte spente!'};
+for(let i=0;i<CONFIG.eta;i++){
+  const c=document.createElement('button');c.className='candle';c.style.setProperty('--c',cols[i%4]);c.setAttribute('aria-label','Spegni candelina '+(i+1));
+  c.addEventListener('click',()=>{if(c.classList.contains('out'))return;c.classList.add('out');left--;upd();
+    if(!left){burst(220);setTimeout(()=>{$('#wish').style.display='block'},900)}});
+  $('#candles').appendChild(c)}
+upd();
+
+/* motivi */
+let idx=0;
+function showWhy(){
+  const w=$('#why'),m=CONFIG.motivi;
+  w.classList.remove('swap');void w.offsetWidth;w.classList.add('swap');
+  setTimeout(()=>{w.textContent=m[idx];$('#count').textContent=`Motivo ${idx+1} di ${m.length}`},reduce?0:230);
+  $('#next').textContent=idx===m.length-1?'Ultima sorpresa':'Un altro motivo'}
+$('#toWhy').addEventListener('click',()=>{idx=0;go('s-why');showWhy()});
+$('#next').addEventListener('click',()=>{
+  if(idx<CONFIG.motivi.length-1){idx++;showWhy()}
+  else{go('s-end');burst(260);hearts()}});
+$('#heart').addEventListener('click',()=>{hearts(40);burst(80)});
+</script>
+</body>
+</html>
